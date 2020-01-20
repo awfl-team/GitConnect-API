@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "declaration": true,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es2018",
+        "sourceMap": true,
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "moduleResolution": "node",
+        "lib": [
+            "dom",
+            "es2018"
+        ],
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "alwaysStrict": true,
+        "skipLibCheck": true,
+        "noUnusedParameters": false,
+        "strictNullChecks": true,
+        "esModuleInterop": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "incremental": true
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
