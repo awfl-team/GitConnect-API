@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
-import { NestExpressApplication } from '@nestjs/platform-express'
+import { NestFastifyApplication } from '@nestjs/platform-fastify'
 
 async function bootstrap(): Promise<void> {
-    const app = await NestFactory.create<NestExpressApplication>(AppModule)
+    const app = await NestFactory.create<NestFastifyApplication>(AppModule)
     await app.listen(3000)
 }
 bootstrap()
