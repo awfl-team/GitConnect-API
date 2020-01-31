@@ -26,4 +26,8 @@ export class UserService {
     async findByUsername(username: string): Promise<User | null> {
         return await this.usersProviders.findOne({ username: username }).exec()
     }
+
+    async findByEmail(email: string): Promise<User | null> {
+        return await this.usersProviders.findOne({ email: email }).exec()
+    }
 }
