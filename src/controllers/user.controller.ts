@@ -1,25 +1,30 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common'
-import { UserService } from '../services/user.service'
 import { User } from '../models/user.model'
 import { ApiTags } from '@nestjs/swagger'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
 
 @ApiTags('User')
 @Controller('users')
 export class UserController {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        @InjectRepository(User)
+        private readonly usersRepository: Repository<User>
+    ) {}
 
     @Get()
     findAll(): Promise<User[]> {
-        return this.userService.findAll()
+        const test = this.usersRepository.find()
+        return test
     }
 
     @Get(':id')
-    findById(@Param('id') id: string): Promise<User | null> {
-        return this.userService.findById(id)
+    findById(@Param('id') id: string): Promise<User | undefined> {
+        return this.usersRepository.findOne(id)
     }
 
     @Post()
-    async create(@Body() user: User): Promise<void> {
-        await this.userService.create(user)
+    create(@Body() user: User): void {
+        this.usersRepository.create(user)
     }
 }

@@ -17,25 +17,17 @@ export class AuthController {
     @HttpCode(200)
     async login(@Body() credentials: Credentials): Promise<{ token: string } | string> {
         const user = { username: credentials.login, password: credentials.password } as User
-        const isValid = await this.authService.validateUser(credentials)
+        const isValid = await this.authService.validateLoginUser(credentials)
         return isValid ? this.authService.generateToken(user) : ''
     }
 
     @Post('register')
     async register(@Body() user: User): Promise<BadRequestException | void> {
-        const userByEmail = await this.userService.findByEmail(user.email ?? '')
-        const userByUsername = await this.userService.findByUsername(user.username ?? '')
-
-        if (userByEmail !== null && userByUsername !== null) {
-            return new BadRequestException('username and email exist')
+        const validateRegister = await this.authService.validateRegisterUser(user)
+        if (validateRegister) {
+            await this.userService.createUser(user)
+        } else {
+            return new BadRequestException(validateRegister)
         }
-        if (userByEmail !== null) {
-            return new BadRequestException('email exist')
-        }
-        if (userByUsername !== null) {
-            return new BadRequestException('username exist')
-        }
-        user.role = User.userRole
-        await this.userService.create(user)
     }
 }

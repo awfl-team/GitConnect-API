@@ -16,7 +16,7 @@ async function bootstrap(): Promise<void> {
         .build()
     const document = SwaggerModule.createDocument(app, options)
 
-    SwaggerModule.setup('api', app, document)
+    SwaggerModule.setup('swagger', app, document)
     app.useGlobalPipes(new ValidationPipe())
     app.enableCors(corsOption)
     await app.listen(3000)

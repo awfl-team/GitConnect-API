@@ -1,25 +1,32 @@
-import { Document } from 'mongoose'
 import { ApiProperty } from '@nestjs/swagger'
-import { IsEmail, IsNotEmpty } from 'class-validator'
+import { IsEmail, IsEmpty, IsNotEmpty } from 'class-validator'
+import { Column, Entity, ObjectIdColumn } from 'typeorm'
 
-export class User extends Document {
+@Entity()
+export class User {
     static adminRole = 'ADMIN'
     static userRole = 'USER'
 
+    @ObjectIdColumn()
     @ApiProperty()
-    id?: string
+    _id?: string
 
+    @Column()
     @IsNotEmpty()
     @ApiProperty()
     username?: string
 
+    @Column()
     @IsNotEmpty()
     @ApiProperty()
     password?: string
 
+    @Column()
+    @IsEmpty()
     @ApiProperty({ enum: [User.adminRole, User.userRole] })
     role?: string
 
+    @Column()
     @IsEmail()
     @ApiProperty()
     email?: string
