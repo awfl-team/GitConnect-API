@@ -16,7 +16,7 @@
         "test": "mocha -r ts-node/register src/**/*.spec.ts"
     },
     "dependencies": {
-        "@nestjs/common": "^6.7.2",
+        "@nestjs/common": "^9.2.0",
         "@nestjs/core": "^6.7.2",
         "@nestjs/platform-express": "^6.10.14",
         "@nestjs/platform-fastify": "^6.10.14",
